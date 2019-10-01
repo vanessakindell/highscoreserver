@@ -1,0 +1,38 @@
+Clearing old gamecodes
+Started server
+Loading gamecodes
+Gamecode 21 is now identified as Attack on Planet 21
+Gamecode 23 is now identified as Attack on Planet 22
+Gamecode 24 is now identified as Old Version of Attack on Planet 23
+Gamecode 25 is now identified as Old Version of Attack on Planet 23
+Gamecode 26 is now identified as Old Version of Attack on Planet 23
+Gamecode 27 is now identified as Current Version of Attack on Planet 23
+Gamecode 28 is now identified as Development Build of Attack on Planet 23
+Gamecode 30 is now identified as Attack on Planet 24
+Gamecodes loaded.
+Recieved a message from 192.168.1.114
+Score from 192.168.1.114) NONE: 0
+Loading table 28
+Table 28 not found, generating a clean table.
+Saved table 28
+Loading table 28
+Read table 28 from file.
+Sorting current table.
+Saved table 28
+Loading table 28
+Read table 28 from file.
+Saved table 28
+Sent table 28 to client
+Recieved a message from 192.168.1.114
+Score from 192.168.1.114) NONE: 0
+Loading table 27
+Read table 27 from file.
+Loading table 27
+Read table 27 from file.
+Sorting current table.
+Saved table 27
+Loading table 27
+Read table 27 from file.
+Saved table 27
+Sent table 27 to client
+Shutting down server
