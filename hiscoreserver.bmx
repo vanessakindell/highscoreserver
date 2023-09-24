@@ -1,7 +1,7 @@
 SuperStrict
 
-Import BRL.EventQueue				'Required for the MaxGUI event handling
-Import MaxGui.Drivers
+Import BRL.EventQueue
+Import gtk.gtk3maxgui
 
 ?Linux
 	Import "-lfontconfig"
@@ -12,12 +12,12 @@ Import MaxGui.Drivers
 	Include "Trayicon.bmx"
 	Import MaxGUI.Win32MaxGUIEx			'Required for the System Tray feature and using the MaxGUI (use instead of MaxGUI.Drivers)
 ?
-Const Version:String = "4.82"
+Const Version:String = "4.83"
 
-AppTitle = "VanessaSoft Mercury Engine High-Score Server v"+Version
+AppTitle = "VanessaSoft Mercury Engine High-Score Server GTK v"+Version
 
 '__/ Globals \_______________________________________________________________________________________________________________________________________________________
-'------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Global cl:Int = False										'<- Change this one if you want a CLI version
 Global WindowThread:TThread
 Global Hidden:Int = False
@@ -36,7 +36,7 @@ Global infocount:Int;
 '__/ Set Window or Console Mode \_______________________________________________________________________________________________________________________________________________________
 '------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Local a:Int
+Local a:String
 
 For a = EachIn AppArgs
 	If a="cl" Then
@@ -89,9 +89,9 @@ Function RunWindowed()
 	CreateMenu"&Shutdown Server",104,filemenu,Null,MODIFIER_COMMAND
 	
 	Label:TGadget = CreateTextArea(0,0,800,580,window,TEXTAREA_READONLY|TEXTAREA_WORDWRAP)
-	SetGadgetText(Label,AppTitle)
-	Local TextField:TGadget = CreateTextField(0,580,740,20,window,0)
-	Local button:TGadget = CreateButton("OK",740,580,60,20,window,BUTTON_OK)
+	SetGadgetText(Label:TGadget,AppTitle)
+	Local TextField:TGadget = CreateTextField(0,560,740,20,window,0)
+	Local button:TGadget = CreateButton("OK",740,560,60,20,window,BUTTON_OK)
 	
 	UpdateWindowMenu window
 	
@@ -178,7 +178,7 @@ Function Info( inf$ )
 	If cl Then
 		Print inf$
 	Else
-		SetGadgetText(Label,GadgetText(Label)+"~n"+inf$)
+		SetGadgetText(Label:TGadget,GadgetText(Label:TGadget)+"~n"+inf$)
 	EndIf
 	
 	Local L:LogEntry = New LogEntry
@@ -357,7 +357,7 @@ Function ServerBackend:Object( data:Object )
 		Local SocketStream:TStream = CreateSocketStream(Accept);
 		
 		If Not Eof(SocketStream) Then			
-			info("Recieved a message from "+DottedIP(SocketRemoteIP(Accept)))
+			info("Recieved a message from "+DottedIP(Int(SocketRemoteIP(Accept))))
 			
 			Delay 300 'Allow time for message to process
 			
@@ -374,7 +374,7 @@ Function ServerBackend:Object( data:Object )
 				
 				If name="" Then name = "NONE"
 				
-				info("Score from "+DottedIP(SocketRemoteIP(Accept))+") "+name+": "+String(score))
+				info("Score from "+DottedIP(Int(SocketRemoteIP(Accept)))+") "+name+": "+String(score))
 				
 				load_hiscores(code)
 				HighScoreAdd(name,score,code)

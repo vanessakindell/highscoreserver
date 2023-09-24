@@ -10,14 +10,11 @@ Import BRL.Threads
 Import BRL.FileSystem
 Import BRL.Retro
 Import Pub.StdC
+Import BRL.SystemDefault
 
 ?Linux
 	Import "-ldl"
 ?
-
-Extern
-Function time()
-End Extern
 
 Const Version:String = "4.81"
 
@@ -102,7 +99,8 @@ Function SaveLog()
 		DeleteFile(PreviousLogName)
 	EndIf
 	
-	PreviousLogName = CurrentDir()+"/logs/log"+Replace(time(),":","")+".txt";
+	Local PreviousLogName:String
+	PreviousLogName = CurrentDir()+"/logs/log"+CurrentTime()+" "+CurrentDate()+".txt";
 	Local Filestream:TStream = WriteFile(PreviousLogName);
 	For Local L:LogEntry = EachIn LogEntryList
 		WriteLine(Filestream,L.Data);
@@ -247,8 +245,8 @@ Function ServerBackend:Object( data:Object )
 		
 		Local SocketStream:TStream = CreateSocketStream(Accept);
 		
-		If Not Eof(SocketStream) Then			
-			info("Recieved a message from "+DottedIP(SocketRemoteIP(Accept)))
+		If Not Eof(SocketStream) Then		
+			info("Recieved a message from "+DottedIP(Int(SocketRemoteIP(Accept))))
 			
 			Delay 300 'Allow time for message to process
 			
@@ -265,7 +263,7 @@ Function ServerBackend:Object( data:Object )
 				
 				If name="" Then name = "NONE"
 				
-				info("Score from "+DottedIP(SocketRemoteIP(Accept))+") "+name+": "+String(score))
+				info("Score from "+DottedIP(Int(SocketRemoteIP(Accept)))+") "+name+": "+String(score))
 				
 				load_hiscores(code)
 				HighScoreAdd(name,score,code)

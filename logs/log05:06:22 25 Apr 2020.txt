@@ -1,0 +1,14 @@
+Clearing old gamecodes
+Started server
+Loading gamecodes
+Gamecode 21 is now identified as Attack on Planet 21
+Gamecode 22 is now identified as Attack on Planet 22 Beta
+Gamecode 23 is now identified as Attack on Planet 22
+Gamecode 24 is now identified as Old Version of Attack on Planet 23
+Gamecode 25 is now identified as Old Version of Attack on Planet 23
+Gamecode 26 is now identified as Old Version of Attack on Planet 23
+Gamecode 27 is now identified as Current Version of Attack on Planet 23
+Gamecode 28 is now identified as Development Build of Attack on Planet 23
+Gamecode 30 is now identified as Attack on Planet 24
+Gamecodes loaded.
+Shutting down server
